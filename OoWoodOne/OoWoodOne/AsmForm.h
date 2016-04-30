@@ -362,6 +362,21 @@ ulong RegType2RegIndex(ulong regType);
 opcode_type FindAsmOpt(const char* keyWord);
 opcode_type GetOpcodeType(const char* text);
 ulong Regscale2Regtype(t_operand* op);
+/*
+ * 此函数功能为填cmdInfo节点，一个cmdInfo节点能完整说明一条汇编指令所有信息。
+ * 包括基本的地址、汇编指令文本、汇编枚举类型、字节码；
+ * 还有所有操作数的信息，操作数类型、大小、所用寄存器、操作数值。
+ * ulong ip;						///EIP
+ * int optType;//opcode type		///枚举出来的指令类型
+ * op_info op[3];					///
+ * ulong cmdLen;					///字节码长度
+ * char cmdBuf[MAXCMDSIZE];		///字节码数组
+ * char cmd[TEXTLEN];				///反汇编出来的汇编指令
+ *
+ * op[i].opType		操作数类型、操作数大小
+ * op[i].reg		如果操作数是寄存器用了哪个寄存器
+ * op[i].opConst	操作数
+*/
 void convertDisasm2Cmdinfo(t_disasm* disasm,void* cmdbuf,ulong cmdlen, cmd_info* cmdinfo);
 
 
