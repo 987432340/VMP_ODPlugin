@@ -54,7 +54,12 @@ bool Inst_UD_Chain::AddNode(Inst_UD_Node* node, bool optimize)
 	return true;
 }
 
-
+/*
+	每当添加一条指令到UD链时，第一步先进行栈优化，具体规则有3条：
+	针对POP指令的优化
+	针对RETN指令的优化
+	通用指令的优化
+*/
 void Inst_UD_Chain::OptimizeStack()
 {
 	if (!_tail)
@@ -166,11 +171,17 @@ void Inst_UD_Chain::OptimizeStack()
 
 }
 
-//optimize the ud chain.
+/*
+	根据寄存器的use-def优化UD链
+	例如：同一寄存器在连续的执行流中被定义了2次，那么前一次的指令就是垃圾指令
+*/
 void Inst_UD_Chain::OptimizeUD(Inst_UD_Node* node)
 {
 	if (!node)
 		return;
+	/*
+		
+	*/
 	ulong unselfDef = (node->opRef & node->opDef) ^ node->opDef;
 	//def self or no def  
 	if (!unselfDef)
@@ -207,6 +218,9 @@ void Inst_UD_Chain::OptimizeUD(Inst_UD_Node* node)
 	//	Addtolist(0, 0, "    arv  header");
 }
 
+/*
+	添加节点完成，返回READCMDCHAIN时，再次OptimizeUD，防止遗漏。
+*/
 void Inst_UD_Chain::OptimizeChain()
 {
 	if (!_tail)
@@ -334,6 +348,9 @@ Inst_UD_Node* Inst_UD_Chain::AnalyseUD(t_disasm* disasm, void* cmdBuf, ulong cmd
 		return NULL;
 	}
 
+	/* 
+		convertDisasm2Cmdinfo函数填充了node->cmdInfo结构
+	*/
 	Inst_UD_Node* node = new Inst_UD_Node;
 	memset(node, 0, sizeof(Inst_UD_Node));
 	convertDisasm2Cmdinfo(disasm, cmdBuf, cmdLen, &node->cmdInfo);
@@ -344,6 +361,17 @@ Inst_UD_Node* Inst_UD_Chain::AnalyseUD(t_disasm* disasm, void* cmdBuf, ulong cmd
 	udr[0] = node->cmdInfo.op[0].reg;
 	udr[1] = node->cmdInfo.op[1].reg;
 	udr[2] = node->cmdInfo.op[2].reg;
+
+	/*
+		对当前node对应的指令进行分析，添加use-def信息，以后在这里可以进行指令的扩展
+		
+		opDef: 		此条指令def的寄存器
+		opRef: 		此条指令use的寄存器
+		stackDef:	此条指令执行完成后对栈的增减变化
+		espPosDef:	此条指令执行完成后在栈上def的具体位置
+		espPosRef:	此条指令执行时在栈上def的具体位置
+		espPos:		记录当前节点执行完成后esp位置
+	*/
 	switch (node->cmdInfo.optType)
 	{		
 		case ASM_AND:

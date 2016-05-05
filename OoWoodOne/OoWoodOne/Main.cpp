@@ -16,6 +16,10 @@ HWND hwmain = NULL;
 ULONG runStatus = RUN_STAUTS_NONE;
 VmpExplore* curVmpExplore=NULL;
 
+/*
+ *  主要是这4个函数来执行具体的功能代码
+ *  而其他都是OD的界面实现的代码
+ */
 
 void AnalyseVMP(void *item);
 void PatchHashVMP();
