@@ -258,7 +258,11 @@ Inst_UD_Chain* VmpExplore::ReadCmdChain(ulong addr, bool optimize, int maxCmdCou
 	return ret;
 
 }
-
+/*
+	从mov     edx, dword ptr [eax*4+40A9FA]这样的指令开始向后跟踪，
+	找到retn n执行vm handler的入口点，并暂存
+	一个程序中可能不止一个这样的入口
+*/
 bool VmpExplore::GetVMhandlerEntry(ulong addr)
 {
 	char cmd[MAXCMDSIZE];
@@ -1056,7 +1060,7 @@ bool VmpExplore::AnalyseDispatchInfo(Inst_UD_Chain* chain, bool foundJoinReg)
 			if (!reg0 || !reg1)
 			{
 				tmp = tmp->nextNode;
-				continue;
+	、			continue;
 			}
 			
 			_dispatchInfo.idspReg = RegType2RegIndex(reg0);
