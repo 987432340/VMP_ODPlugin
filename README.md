@@ -1,4 +1,4 @@
-# VMP_ODPlugin
+# VMP2.x分析插件
 VMProtect OD Plugin
 
 Use to analyse vmp handlers and some other operations.
@@ -14,3 +14,7 @@ Fix API：      修复API，分某个地址和整个区段（在要修复的位�
 
 Analyse code： 分析vmcode，需要输入esi（也就是vm_eip）
 
+----
+**编译环境**: VS2013
+
+测试分析**VMProtect 2.06**成功，exe 上传至**Test** 目录
