@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Document>
+	<Protection InputFileName="VMPCeshi.exe" Options="5064" CheckKernelDebugger="false" CompressionMode="0" VMCodeSectionName=".vmp" VMExecutorCount="3" LicenseDataFileName="" OutputFileName="" WaterMarkName="" RunParameters="">
+		<Folders/>
+		<Procedures>
+			<Procedure MapAddress="tiaojianZhuanyi1" IncludedInCompilation="true" Options="1" CompilationType="2"/>
+			<Procedure MapAddress="switch1" IncludedInCompilation="true" Options="1" CompilationType="2"/>
+			<Procedure MapAddress="xunhuan1" IncludedInCompilation="true" Options="1" CompilationType="2"/>
+			<Procedure MapAddress="xunhuan2" IncludedInCompilation="true" Options="1" CompilationType="2"/>
+			<Procedure MapAddress="fenzhi1" IncludedInCompilation="true" Options="1" CompilationType="2"/>
+			<Procedure MapAddress="fenzhi2" IncludedInCompilation="true" Options="1" CompilationType="2"/>
+			<Procedure MapAddress="jisuan" IncludedInCompilation="true" Options="1" CompilationType="2"/>
+			<Procedure MapAddress="EntryPoint" IncludedInCompilation="true" Options="1" CompilationType="2"/>
+			<Procedure MapAddress="diaoyong1" IncludedInCompilation="true" Options="1" CompilationType="2"/>
+		</Procedures>
+	</Protection>
+	<DLLBox/>
+	<Script IncludedInCompilation="true"></Script>
+	<LicenseManager ProductCode="" LicenseData="" Algorithm="" Bits="0" PublicExp="" PrivateExp="" Modulus="" BlackList=""/>
+</Document>
