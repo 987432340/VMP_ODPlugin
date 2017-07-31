@@ -160,6 +160,15 @@ bool VmpExplore::AnalyseVMP(ulong addr)
 	return false;
 }
 
+//************************************
+// Method:    ReadCmdChain
+// Returns:   Inst_UD_Chain*
+// Parameter: ulong addr
+// Parameter: bool optimize
+// Parameter: int maxCmdCount
+// Parameter: bool showLog
+// 读取汇编执行时命令流，直到执行到第一条retn指令结束。
+//************************************
 Inst_UD_Chain* VmpExplore::ReadCmdChain(ulong addr, bool optimize, int maxCmdCount, bool showLog)
 {
 	char cmd[MAXCMDSIZE];
@@ -1060,7 +1069,7 @@ bool VmpExplore::AnalyseDispatchInfo(Inst_UD_Chain* chain, bool foundJoinReg)
 			if (!reg0 || !reg1)
 			{
 				tmp = tmp->nextNode;
-	、			continue;
+				continue;
 			}
 			
 			_dispatchInfo.idspReg = RegType2RegIndex(reg0);

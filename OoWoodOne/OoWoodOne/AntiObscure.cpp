@@ -362,6 +362,8 @@ Inst_UD_Node* Inst_UD_Chain::AnalyseUD(t_disasm* disasm, void* cmdBuf, ulong cmd
 	udr[1] = node->cmdInfo.op[1].reg;
 	udr[2] = node->cmdInfo.op[2].reg;
 
+	LOG2VIEW("[%s] udr[0]: %u,udr[1]: %u,udr[2]: %u",__FUNCTION__ ,udr[0], udr[1], udr[2]);
+
 	/*
 		对当前node对应的指令进行分析，添加use-def信息，以后在这里可以进行指令的扩展
 		
@@ -372,6 +374,7 @@ Inst_UD_Node* Inst_UD_Chain::AnalyseUD(t_disasm* disasm, void* cmdBuf, ulong cmd
 		espPosRef:	此条指令执行时在栈上def的具体位置
 		espPos:		记录当前节点执行完成后esp位置
 	*/
+
 	switch (node->cmdInfo.optType)
 	{		
 		case ASM_AND:
@@ -519,6 +522,10 @@ Inst_UD_Node* Inst_UD_Chain::AnalyseUD(t_disasm* disasm, void* cmdBuf, ulong cmd
 			}
 			break;
 		}
+		/*
+			遇到call指令做以下记录：
+
+		*/
 		case ASM_CALL:
 		{
 			__addRef(udr[0]);

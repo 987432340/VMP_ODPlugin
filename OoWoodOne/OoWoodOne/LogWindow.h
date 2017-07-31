@@ -29,6 +29,7 @@ struct log_data
 
 #define CREATE_LOGFILE LogWindow::CreateLogFile
 #define LOG2FILE LogWindow::LogToFile
+#define LOG2VIEW LogWindow::LogToView
 #define CLOSE_LOGFILE LogWindow::CloseLogFile
 
 #define LOG LogWindow::AddToLog
@@ -65,6 +66,7 @@ public:
 
 
 	static HANDLE CreateLogFile(const char* filename);
+	static void LogToView(const char* format, ...);
 	static void LogToFile(HANDLE file, const char* format, ...);
 	static void CloseLogFile(HANDLE file);
 };

@@ -433,6 +433,18 @@ void LogWindow::LogToFile(HANDLE file, const char* format, ...)
 
 }
 
+void LogWindow::LogToView(const char* format, ...)
+{
+	char buffer[TEXTLEN];
+	ulong buflen = 0;
+	va_list args;
+	va_start(args, format);
+	buflen = _vsnprintf(buffer, TEXTLEN - 1, format, args);
+	va_end(args);
+	strcat_s(buffer, "\r\n");
+	::OutputDebugStringA(buffer);
+}
+
 void LogWindow::CloseLogFile(HANDLE file)
 {
 	CloseHandle(file);
